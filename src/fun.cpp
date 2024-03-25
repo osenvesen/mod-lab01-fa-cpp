@@ -4,74 +4,71 @@
 #include <cstring>
 #include <cctype>
 
-unsigned int faStr1(const char *str) {
+unsigned int faStr1(const char* str) {
     unsigned int count = 0;
-    const char *word = str;
-    
-    while (*str) {
-        if (std::isalpha(*str)) {
-            word = str;
-            while (std::isalpha(*str)) {
-                if (std::isdigit(*str)) {
-                    break;
-                }
-                str++;
-            }
-            if (word != str) {
+    bool hasDigit = false;
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (isalnum(str[i]) && isdigit(str[i])) {
+            hasDigit = true;
+        }
+        if (!isalnum(str[i]) || str[i + 1] == '\0') {
+            if (!hasDigit) {
                 count++;
             }
-        } else {
-            str++;
+            hasDigit = false;
         }
+        i++;
     }
-    
+
     return count;
 }
 
-unsigned int faStr2(const char *str) {
+unsigned int faStr2(const char* str) {
     unsigned int count = 0;
-    bool startOfWord = true;
-    
-    while (*str) {
-        if (std::isupper(*str)) {
-            startOfWord = true;
-        } else if (startOfWord && std::islower(*str)) {
-            const char *word = str;
-            while (std::isalpha(*str)) {
-                if (!std::islower(*str)) {
-                    break;
-                }
-                str++;
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (isupper(str[i])) {
+            i++;
+            while (islower(str[i])) {
+                i++;
             }
-            if (word != str) {
+            if (!isalpha(str[i])) {
                 count++;
             }
-            startOfWord = false;
-        } else {
-            startOfWord = false;
-            str++;
         }
+        else {
+            while (islower(str[i])) {
+                i++;
+            }
+        }
+        i++;
     }
-    
+
     return count;
 }
 
-unsigned int faStr3(const char *str) {
-     unsigned int wordCount = 0;
-    unsigned int letterCount = 0;
-    
-    while (*str) {
-        if (std::isalpha(*str)) {
-            const char *word = str;
-            while (std::isalpha(*str)) {
-                letterCount++;
-                str++;
+unsigned int faStr3(const char* str) {
+    unsigned int totalLength = 0;
+    unsigned int wordCount = 0;
+    int i = 0;
+
+    while (str[i] != '\0') {
+        if (isalnum(str[i])) {
+            int wordLength = 0;
+            while (isalnum(str[i])) {
+                wordLength++;
+                i++;
             }
+            totalLength += wordLength;
             wordCount++;
-        } else {
-            str++;
+        }
+        else {
+            i++;
         }
     }
-    
-    return letterCount / wordCount;
+
+    return totalLength / wordCount;
 }
