@@ -1,5 +1,8 @@
 // Copyright 2022 UNN-IASR
 #include "fun.h"
+#include <iostream>
+#include <cstring>
+#include <cctype>
 
 int main() {
    const char *input = "fghfijghd Vfpjm 5739 78678578 Aghfgmb fgkmognopgnnonrojn";
