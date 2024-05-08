@@ -14,7 +14,7 @@ unsigned int faStr1(const char* str) {
             hasDigit = true;
         }
         if (!isalnum(str[i]) || str[i + 1] == '\0') {
-            if (!hasDigit) {
+            if (!hasDigit && (isalpha(str[i]) || str[i + 1] == '\0')) {
                 count++;
             }
             hasDigit = false;
@@ -31,21 +31,25 @@ unsigned int faStr2(const char* str) {
 
     while (str[i] != '\0') {
         if (isupper(str[i])) {
+            bool isValid = true;
             i++;
-            while (islower(str[i])) {
+            while (islower(str[i]) || isupper(str[i])) {
+                if (isupper(str[i])) {
+                    isValid = false;
+                    break;
+                }
                 i++;
             }
-            if (!isalpha(str[i])) {
+            if (!isalpha(str[i]) && isValid) {
                 count++;
             }
         } else {
-            while (islower(str[i])) {
+            i++;
+            while (islower(str[i]) || str[i] == '\0') {
                 i++;
             }
         }
-        i++;
-    }
-
+    
     return count;
 }
 
