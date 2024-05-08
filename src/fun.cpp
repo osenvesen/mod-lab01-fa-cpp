@@ -13,7 +13,7 @@ unsigned int faStr1(const char* str) {
             hasDigit = true;
         }
         if (!isalnum(str[i]) || str[i + 1] == '\0') {
-            if (!hasDigit) {
+            if (hasDigit == false) {
                 count++;
             }
             hasDigit = false;
@@ -30,16 +30,21 @@ unsigned int faStr2(const char* str) {
 
     while (str[i] != '\0') {
         if (isupper(str[i])) {
+            // Начало слова обнаружено
+            bool validWord = true;
             i++;
             while (islower(str[i])) {
                 i++;
             }
-            if (!isalpha(str[i])) {
+            if (isalpha(str[i])) {
+                validWord = false;
+            }
+            if (validWord) {
                 count++;
             }
         }
         else {
-            while (islower(str[i])) {
+            while (islower(str[i]) || isupper(str[i])) {
                 i++;
             }
         }
@@ -69,18 +74,6 @@ unsigned int faStr3(const char* str) {
         }
     }
 
+    if (wordCount == 0) return 0;
     return totalLength / wordCount;
-}
-
-int main() {
-
-    setlocale(LC_ALL, "rus");
-
-    const char* input = "fghfijghd Vfpjm 5739 78678578 Aghfgmb fgkmognopgnnonrojn";
-
-    std::cout << "Количество слов, не содержащих цифр: " << faStr1(input) << std::endl;
-    std::cout << "Количество слов, начинающихся на заглавную латинскую букву, а среди других символов этих слов только латинские строчные буквы: " << faStr2(input) << std::endl;
-    std::cout << "Средняя длина слова в строке: " << faStr3(input) << std::endl;
-
-    return 0;
 }
