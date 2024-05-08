@@ -6,19 +6,24 @@
 unsigned int faStr1(const char* str) {
     unsigned int count = 0;
     bool hasDigit = false;
-    int i = 0;
+    
+    while (*str != '\0' && isspace((unsigned char)*str)) {
+        str++;
+    }
 
-    while (str[i] != '\0') {
-        if (isalnum(str[i]) && isdigit(str[i])) {
+    while (*str != '\0') {
+        if (isalnum(*str) && isdigit(*str)) {
             hasDigit = true;
         }
-        if (!isalnum(str[i]) || str[i + 1] == '\0') {
-            if (hasDigit == false) {
-                count++;
+        if (isspace((unsigned char)*str) || *(str + 1) == '\0') {
+            if (!hasDigit) {
+                if (!isdigit(*(str - 1)) || isspace((unsigned char)*str)) {
+                    count++;
+                }
             }
             hasDigit = false;
         }
-        i++;
+        str++;
     }
 
     return count;
@@ -26,29 +31,24 @@ unsigned int faStr1(const char* str) {
 
 unsigned int faStr2(const char* str) {
     unsigned int count = 0;
-    int i = 0;
 
-    while (str[i] != '\0') {
-        if (isupper(str[i])) {
-            // Начало слова обнаружено
+    while (*str != '\0') {
+        if (isupper(*str)) {
             bool validWord = true;
-            i++;
-            while (islower(str[i])) {
-                i++;
+            str++;
+            while (islower(*str)) {
+                str++;
             }
-            if (isalpha(str[i])) {
+            if (isalpha(*str)) {
                 validWord = false;
             }
             if (validWord) {
                 count++;
             }
         }
-        else {
-            while (islower(str[i]) || isupper(str[i])) {
-                i++;
-            }
+        while (*str && !isupper(*str)) {
+            str++;
         }
-        i++;
     }
 
     return count;
@@ -75,5 +75,7 @@ unsigned int faStr3(const char* str) {
     }
 
     if (wordCount == 0) return 0;
-    return totalLength / wordCount;
+
+    unsigned int avgLength = (totalLength + wordCount / 2) / wordCount;
+    return avgLength;
 }
