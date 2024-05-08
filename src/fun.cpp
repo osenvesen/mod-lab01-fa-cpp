@@ -39,17 +39,17 @@ unsigned int faStr2(const char* str) {
     while (*str) {
         if (isupper((unsigned char)*str)) {
             bool validWord = true;
-            str++;
-
+            const char *start = str++;
+            
             while (islower((unsigned char)*str)) {
                 str++;
             }
 
-            if (*str != '\0' && isalpha((unsigned char)*str)) {
+            if (*str != '\0' && !isspace((unsigned char)*str) && isalpha((unsigned char)*str)) {
                 validWord = false;
             }
 
-            if (validWord) {
+            if (validWord && start != str) {
                 count++;
             }
         } else {
