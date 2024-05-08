@@ -45,16 +45,14 @@ unsigned int faStr2(const char* str) {
                 str++;
             }
 
-            if (isalpha((unsigned char)*str)) {
+            if (*str != '\0' && isalpha((unsigned char)*str)) {
                 validWord = false;
             }
 
             if (validWord) {
                 count++;
             }
-        }
-
-        if (*str) {
+        } else {
             str++;
         }
     }
