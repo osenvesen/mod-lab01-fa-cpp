@@ -1,4 +1,3 @@
-// Copyright 2022 UNN-IASR
 #include "fun.h"
 #include <iostream>
 #include <cstring>
@@ -10,11 +9,11 @@ unsigned int faStr1(const char* str) {
     int i = 0;
 
     while (str[i] != '\0') {
-        if (isalnum(str[i]) && isdigit(str[i])) {
+        if (isdigit(str[i])) {
             hasDigit = true;
         }
-        if ((!isalnum(str[i]) && hasDigit == false) ||
-            (str[i + 1] == '\0' && hasDigit == false)) {
+        if ((!isalnum(str[i]) && !hasDigit) ||
+            (str[i + 1] == '\0' && !hasDigit)) {
             count++;
             hasDigit = false;
         }
@@ -32,18 +31,14 @@ unsigned int faStr2(const char* str) {
         if (isupper(str[i])) {
             bool isValid = true;
             i++;
-            while (islower(str[i]) || str[i] == '\0') {
-                if (isupper(str[i])) {
-                    isValid = false;
-                    break;
-                }
+            while (str[i] != '\0' && islower(str[i])) {
                 i++;
             }
-            if (!isalpha(str[i]) && isValid) {
+            if (!isalpha(str[i]) && isValid && str[i] != '\0') {
                 count++;
             }
         } else {
-            while (islower(str[i]) || isupper(str[i]) || str[i] == '\0') {
+            while (str[i] != '\0' && (islower(str[i]) || isupper(str[i]))) {
                 i++;
             }
         }
@@ -59,7 +54,7 @@ unsigned int faStr3(const char* str) {
     while (str[i] != '\0') {
         if (isalnum(str[i])) {
             int wordLength = 0;
-            while (isalnum(str[i]) || str[i] == '\0') {
+            while (str[i] != '\0' && isalnum(str[i])) {
                 wordLength++;
                 i++;
             }
