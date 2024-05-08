@@ -38,8 +38,7 @@ unsigned int faStr2(const char* str) {
             if (!isalpha(str[i])) {
                 count++;
             }
-        }
-        else {
+        } else {
             while (islower(str[i])) {
                 i++;
             }
@@ -64,8 +63,7 @@ unsigned int faStr3(const char* str) {
             }
             totalLength += wordLength;
             wordCount++;
-        }
-        else {
+        } else {
             i++;
         }
     }
