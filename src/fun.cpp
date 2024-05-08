@@ -13,7 +13,8 @@ unsigned int faStr1(const char* str) {
         if (isalnum(str[i]) && isdigit(str[i])) {
             hasDigit = true;
         }
-        if ((!isalnum(str[i]) && hasDigit == false) || (str[i + 1] == '\0' && hasDigit == false)) {
+        if ((!isalnum(str[i]) && hasDigit == false) || 
+            (str[i + 1] == '\0' && hasDigit == false)) {
             count++;
             hasDigit = false;
         }
@@ -47,7 +48,6 @@ unsigned int faStr2(const char* str) {
             }
         }
     }
-    
     return count;
 }
 
