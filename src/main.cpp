@@ -1,8 +1,8 @@
 // Copyright 2022 UNN-IASR
 #include "fun.h"
-#include <iostream>
 #include <cstring>
 #include <cctype>
+#include <iostream>
 
 int main() {
      setlocale(LC_ALL, "rus");
