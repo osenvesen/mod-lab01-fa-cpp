@@ -5,25 +5,28 @@
 
 unsigned int faStr1(const char* str) {
     unsigned int count = 0;
-    bool hasDigit = false;
-    
-    while (*str != '\0' && isspace((unsigned char)*str)) {
+    bool isWord = false;
+
+    while (*str) {
+        if (isalpha((unsigned char)*str)) {
+            if (!isWord) {
+                isWord = true;
+            }
+        } else if (isdigit((unsigned char)*str)) {
+            if (isWord) {
+                isWord = false;
+            }
+        } else {
+            if (isWord) {
+                count++;
+            }
+            isWord = false;
+        }
         str++;
     }
 
-    while (*str != '\0') {
-        if (isalnum(*str) && isdigit(*str)) {
-            hasDigit = true;
-        }
-        if (isspace((unsigned char)*str) || *(str + 1) == '\0') {
-            if (!hasDigit) {
-                if (!isdigit(*(str - 1)) || isspace((unsigned char)*str)) {
-                    count++;
-                }
-            }
-            hasDigit = false;
-        }
-        str++;
+    if (isWord) {
+        count++;
     }
 
     return count;
@@ -32,21 +35,25 @@ unsigned int faStr1(const char* str) {
 unsigned int faStr2(const char* str) {
     unsigned int count = 0;
 
-    while (*str != '\0') {
-        if (isupper(*str)) {
+    while (*str) {
+        if (isupper((unsigned char)*str)) {
             bool validWord = true;
             str++;
-            while (islower(*str)) {
+
+            while (islower((unsigned char)*str)) {
                 str++;
             }
-            if (isalpha(*str)) {
+
+            if (isalpha((unsigned char)*str)) {
                 validWord = false;
             }
+
             if (validWord) {
                 count++;
             }
         }
-        while (*str && !isupper(*str)) {
+
+        if (!isupper((unsigned char)*str)) {
             str++;
         }
     }
