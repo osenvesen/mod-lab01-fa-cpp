@@ -5,28 +5,29 @@
 
 unsigned int faStr1(const char* str) {
     unsigned int count = 0;
-    bool isWord = false;
+    bool inWord = false;
+    bool hasDigit = false;
 
-    while (*str) {
+    while (*str != '\0') {
         if (isalpha((unsigned char)*str)) {
-            if (!isWord) {
-                isWord = true;
+            if (!inWord) {
+                inWord = true;
+                hasDigit = false;
             }
         } else if (isdigit((unsigned char)*str)) {
-            if (isWord) {
-                isWord = false;
-            }
-        } else {
-            if (isWord) {
-                count++;
-            }
-            isWord = false;
+            hasDigit = true;
         }
-        str++;
-    }
 
-    if (isWord) {
-        count++;
+        if ((!isalnum((unsigned char)*str) || *(str + 1) == '\0') && inWord && !hasDigit) {
+            count++;
+            inWord = false;
+        }
+
+        if (!isalnum((unsigned char)*str)) {
+            inWord = false;
+        }
+
+        str++;
     }
 
     return count;
@@ -53,7 +54,7 @@ unsigned int faStr2(const char* str) {
             }
         }
 
-        if (!isupper((unsigned char)*str)) {
+        if (*str) {
             str++;
         }
     }
