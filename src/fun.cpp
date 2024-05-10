@@ -1,33 +1,23 @@
-#include "fun.h"
 #include <iostream>
 #include <cstring>
 #include <cctype>
 
 unsigned int faStr1(const char* str) {
     unsigned int count = 0;
-    bool inWord = false;
     bool hasDigit = false;
+    int i = 0;
 
-    while (*str != '\0') {
-        if (isalpha((unsigned char)*str)) {
-            if (!inWord) {
-                inWord = true;
-                hasDigit = false;
-            }
-        } else if (isdigit((unsigned char)*str)) {
+    while (str[i] != '\0') {
+        if (isalnum(str[i]) && isdigit(str[i])) {
             hasDigit = true;
         }
-
-        if ((!isalnum((unsigned char)*str) || *(str + 1) == '\0') && inWord && !hasDigit) {
-            count++;
-            inWord = false;
+        if (!isalnum(str[i]) || str[i + 1] == '\0') {
+            if (!hasDigit) {
+                count++;
+            }
+            hasDigit = false;
         }
-
-        if (!isalnum((unsigned char)*str)) {
-            inWord = false;
-        }
-
-        str++;
+        i++;
     }
 
     return count;
@@ -35,26 +25,24 @@ unsigned int faStr1(const char* str) {
 
 unsigned int faStr2(const char* str) {
     unsigned int count = 0;
+    int i = 0;
 
-    while (*str) {
-        if (isupper((unsigned char)*str)) {
-            bool validWord = true;
-            const char *start = str++;
-            
-            while (islower((unsigned char)*str)) {
-                str++;
+    while (str[i] != '\0') {
+        if (isupper(str[i])) {
+            i++;
+            while (islower(str[i])) {
+                i++;
             }
-
-            if (*str != '\0' && !isspace((unsigned char)*str) && isalpha((unsigned char)*str)) {
-                validWord = false;
-            }
-
-            if (validWord && start != str) {
+            if (!isalpha(str[i])) {
                 count++;
             }
-        } else {
-            str++;
         }
+        else {
+            while (islower(str[i])) {
+                i++;
+            }
+        }
+        i++;
     }
 
     return count;
@@ -80,8 +68,5 @@ unsigned int faStr3(const char* str) {
         }
     }
 
-    if (wordCount == 0) return 0;
-
-    unsigned int avgLength = (totalLength + wordCount / 2) / wordCount;
-    return avgLength;
+    return totalLength / wordCount;
 }
