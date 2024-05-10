@@ -6,20 +6,31 @@
 
 unsigned int faStr1(const char* str) {
     unsigned int count = 0;
+    bool inWord = false;
     bool hasDigit = false;
-    int i = 0;
 
-    while (str[i] != '\0') {
-        if (isalnum(str[i]) && isdigit(str[i])) {
+    while (*str != '\0') {
+        if (isalpha((unsigned char)*str)) {
+            if (!inWord) {
+                inWord = true;
+            }
+        }
+        else if (isdigit((unsigned char)*str)) {
             hasDigit = true;
         }
-        if (!isalnum(str[i]) || str[i + 1] == '\0') {
-            if (!hasDigit) {
-                count++;
-            }
+
+        if ((!isalnum((unsigned char)*str) || *(str + 1) == '\0') && inWord && !hasDigit) {
+            count++;
+            inWord = false;
             hasDigit = false;
         }
-        i++;
+
+        if (!isalnum((unsigned char)*str)) {
+            inWord = false;
+            hasDigit = false;
+        }
+
+        str++;
     }
 
     return count;
@@ -27,27 +38,32 @@ unsigned int faStr1(const char* str) {
 
 unsigned int faStr2(const char* str) {
     unsigned int count = 0;
-    int i = 0;
 
-    while (str[i] != '\0') {
-        if (isupper(str[i])) {
-            i++;
-            while (islower(str[i])) {
-                i++;
+    while (*str) {
+        if (isupper((unsigned char)*str)) {
+            bool validWord = true;
+            const char* start = str++;
+
+            while (islower((unsigned char)*str)) {
+                str++;
             }
-            if (!isalpha(str[i])) {
+
+            if (*str != '\0' && !isspace((unsigned char)*str) && !isalpha((unsigned char)*str)) {
+                validWord = false;
+            }
+
+            if (validWord && start != str) {
                 count++;
             }
-        } else {
-            while (islower(str[i])) {
-                i++;
-            }
         }
-        i++;
+        else {
+            str++;
+        }
     }
 
     return count;
 }
+
 
 unsigned int faStr3(const char* str) {
     unsigned int totalLength = 0;
