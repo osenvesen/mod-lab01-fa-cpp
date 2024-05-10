@@ -1,4 +1,5 @@
 // Copyright 2024 osenvesen
+#include "fun.h"
 int main() {
 setlocale(0, "");
 
