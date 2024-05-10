@@ -1,3 +1,4 @@
+// Copyright 2024 osenvesen
 #include <iostream>
 #include <cstring>
 #include <cctype>
@@ -36,8 +37,7 @@ unsigned int faStr2(const char* str) {
             if (!isalpha(str[i])) {
                 count++;
             }
-        }
-        else {
+        } else {
             while (islower(str[i])) {
                 i++;
             }
