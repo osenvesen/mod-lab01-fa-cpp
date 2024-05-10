@@ -18,7 +18,7 @@ unsigned int faStr1(const char* str) {
             hasDigit = true;
         }
 
-        if ((!isalnum((unsigned char)*str) 
+        if ((!isalnum((unsigned char)*str)
             || *(str + 1) == '\0')
             && inWord && !hasDigit) {
             count++;
