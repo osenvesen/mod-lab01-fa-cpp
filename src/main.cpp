@@ -1,12 +1,12 @@
+// Copyright 2024 osenvesen
 int main() {
+setlocale(0, "");
 
-    setlocale(0, "");
+    const char* input = "fg Vfpj 7gf 78  fgkm";
 
-    const char* input = "fghfijghd Vfpjm 5739 78678578 Aghfgmb fgkmognopgnnonrojn";
-
-    std::cout << "Количество слов, не содержащих цифр: " << faStr1(input) << std::endl;
-    std::cout << "Количество слов, начинающихся на заглавную латинскую букву, а среди других символов этих слов только латинские строчные буквы: " << faStr2(input) << std::endl;
-    std::cout << "Средняя длина слова в строке: " << faStr3(input) << std::endl;
+    std::cout << "faStr1: " << faStr1(input) << std::endl;
+    std::cout << "faStr2: " << faStr2(input) << std::endl;
+    std::cout << "faStr3: " << faStr3(input) << std::endl;
 
     return 0;
 }
