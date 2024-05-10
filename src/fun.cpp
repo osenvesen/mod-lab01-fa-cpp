@@ -1,4 +1,5 @@
 // Copyright 2024 osenvesen
+#include "fun.h"
 #include <iostream>
 #include <cstring>
 #include <cctype>
