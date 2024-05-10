@@ -1,6 +1,6 @@
 // Copyright 2024 osenvesen
-#include "fun.h"
 #include <iostream>
+#include "fun.h"
 int main() {
     const char* input = "fg Vfpj 7gf 78  fgkm";
 
