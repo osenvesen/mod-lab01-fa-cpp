@@ -1,7 +1,6 @@
 // Copyright 2024 osenvesen
 #include "fun.h"
 int main() {
-setlocale(0, "");
 
     const char* input = "fg Vfpj 7gf 78  fgkm";
 
