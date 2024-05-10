@@ -14,12 +14,13 @@ unsigned int faStr1(const char* str) {
             if (!inWord) {
                 inWord = true;
             }
-        }
-        else if (isdigit((unsigned char)*str)) {
+        } else if (isdigit((unsigned char)*str)) {
             hasDigit = true;
         }
 
-        if ((!isalnum((unsigned char)*str) || *(str + 1) == '\0') && inWord && !hasDigit) {
+        if ((!isalnum((unsigned char)*str) 
+            || *(str + 1) == '\0')
+            && inWord && !hasDigit) {
             count++;
             inWord = false;
             hasDigit = false;
@@ -48,15 +49,15 @@ unsigned int faStr2(const char* str) {
                 str++;
             }
 
-            if (*str != '\0' && !isspace((unsigned char)*str) && !isalpha((unsigned char)*str)) {
+            if (*str != '\0' && !isspace((unsigned char)*str)
+                && !isalpha((unsigned char)*str)) {
                 validWord = false;
             }
 
             if (validWord && start != str) {
                 count++;
             }
-        }
-        else {
+        } else {
             str++;
         }
     }
