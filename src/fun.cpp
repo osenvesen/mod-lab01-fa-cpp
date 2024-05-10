@@ -62,8 +62,7 @@ unsigned int faStr3(const char* str) {
             }
             totalLength += wordLength;
             wordCount++;
-        }
-        else {
+        } else {
             i++;
         }
     }
