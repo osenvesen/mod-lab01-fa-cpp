@@ -1,7 +1,7 @@
 // Copyright 2024 osenvesen
 #include "fun.h"
+#include <iostream>
 int main() {
-
     const char* input = "fg Vfpj 7gf 78  fgkm";
 
     std::cout << "faStr1: " << faStr1(input) << std::endl;
