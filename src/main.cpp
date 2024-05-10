@@ -1,6 +1,6 @@
 int main() {
 
-    setlocale(LC_ALL, "rus");
+    setlocale(0, "");
 
     const char* input = "fghfijghd Vfpjm 5739 78678578 Aghfgmb fgkmognopgnnonrojn";
 
